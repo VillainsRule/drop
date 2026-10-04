@@ -1,0 +1,15 @@
+{
+    "plugins": ["prettier-plugin-svelte"],
+    "tabWidth": 4,
+    "printWidth": 999,
+    "quoteProps": "preserve",
+    "overrides": [
+        {
+            "files": "*.svelte",
+            "options": {
+                "parser": "svelte",
+                "quoteProps": "preserve"
+            }
+        }
+    ]
+}

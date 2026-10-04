@@ -1,0 +1,11 @@
+node_modules
+bun.lock
+
+build
+.svelte-kit
+
+drops
+keys.txt
+.env
+
+.DS_Store
