@@ -17,9 +17,9 @@ class DropStore {
         return validId(id) && fs.existsSync(path.join(this.path, id));
     }
 
-    write(id: string, content: string, overwrite: boolean): boolean {
+    write(id: string, content: Buffer, override: boolean): boolean {
         try {
-            fs.writeFileSync(path.join(this.path, id), content, { flag: overwrite ? 'w' : 'wx' });
+            fs.writeFileSync(path.join(this.path, id), content, { flag: override ? 'w' : 'wx' });
             return true;
         } catch (err) {
             if ((err as NodeJS.ErrnoException).code === 'EEXIST') return false;
@@ -27,7 +27,7 @@ class DropStore {
         }
     }
 
-    create(content: string, customId?: string, override = false): string | null {
+    create(content: Buffer, customId?: string, override = false): string | null {
         if (customId !== undefined) {
             if (!validId(customId)) return null;
             return this.write(customId, content, override) ? customId : null;
@@ -42,11 +42,11 @@ class DropStore {
         }
     }
 
-    get(id: string): string | null {
+    get(id: string): Buffer | null {
         if (!validId(id)) return null;
         const filePath = path.join(this.path, id);
         if (!fs.existsSync(filePath)) return null;
-        return fs.readFileSync(filePath, 'utf-8');
+        return fs.readFileSync(filePath);
     }
 }
 

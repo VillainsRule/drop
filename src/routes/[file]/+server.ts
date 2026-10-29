@@ -4,6 +4,6 @@ const notFoundPage = () => '<!DOCTYPE html><html lang="en"><head><meta charset="
 
 export const GET = async ({ params }: { params: { file: string } }) => {
     const content = dropStore.get(params.file);
-    if (content !== null) return new Response(content, { headers: { 'Content-Type': 'text/plain', 'X-Content-Type-Options': 'nosniff' } });
+    if (content !== null) return new Response(new Uint8Array(content), { headers: { 'Content-Type': 'text/plain', 'X-Content-Type-Options': 'nosniff' } });
     else return new Response(notFoundPage(), { status: 404, headers: { 'Content-Type': 'text/html' } });
 };

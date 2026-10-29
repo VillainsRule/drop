@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request, cookies, url }) => {
 
     if (customPath !== null && (!validId(customPath) || reservedPaths.includes(customPath))) return json({ ok: false, message: 'invalid path' }, 400);
 
-    const id = dropStore.create(await request.text(), customPath ?? undefined, override);
+    const id = dropStore.create(Buffer.from(await request.arrayBuffer()), customPath ?? undefined, override);
     if (id === null) return json({ ok: false, message: 'path already taken' }, 409);
 
     return json({ ok: true, path: id });
