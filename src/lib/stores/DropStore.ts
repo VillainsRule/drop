@@ -33,7 +33,7 @@ class DropStore {
             return this.write(customId, content, override) ? customId : null;
         }
 
-        let length = 5;
+        let length = 10;
         for (let attempt = 1; ; attempt++) {
             let id = '';
             for (let i = 0; i < length; i++) id += ALPHABET[crypto.randomInt(ALPHABET.length)];
